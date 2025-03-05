@@ -18,6 +18,10 @@ body {
     line-height: 1.5;
     padding-top: 80px; 
 }
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
 
 /* Header Styles */
 .hd {
@@ -27,7 +31,7 @@ body {
     width: 100%;
     height: 80px;
     padding: 10px 60px;
-    background-color:	#282c34;
+    background-color:#282c34;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -84,6 +88,7 @@ body {
 /* Navigation Toggle (Hamburger Icon) */
 .nav__toggle {
     display: none; /* Hide by default */
+    margin-right:-30px;
     cursor: pointer;
     color: white;
 }
@@ -143,7 +148,9 @@ body {
     font-size: 2em;
     color: #fff;
 }
-
+.hero-text div{
+    display:inline-block;
+}
 .hero-btn {
     margin-top: 20px;
     display: flex;
@@ -152,16 +159,21 @@ body {
 
 .btn {
     padding: 10px 20px;
-    background-color: #fff; /* Green button */
-    color: black;
+    background-color: white; /* Green button */
     text-decoration: none;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    border-radius: 5px;
+    font-family: system-ui,-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     transition: background-color 0.3s;
+    border: 3px solid #f8512f;
+    color:#f8512f;
 }
 
 .btn:hover {
     background-color: #f8512f;
+    border:3px solid white ;
+    color:white;
+    box-shadow: 0 0 15px #f8512f;
+    transition: 0.3s ease-in-out;
+
 }
 
 .hero-img {
@@ -239,50 +251,67 @@ body {
     gap: 20px;
     width: 100%;
     scrollbar-width: thin;
-    scrollbar-color: #282c34 #ffffff; /* Violet scrollbar */
-    -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+    scrollbar-color: #282c34 #ffffff;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Custom Scrollbar for Skills Section */
+/* Custom Scrollbar */
 .skills-section::-webkit-scrollbar {
-    height: 8px; /* Height for horizontal scrollbar */
+    height: 8px;
 }
 
 .skills-section::-webkit-scrollbar-thumb {
-    background-color: #212121; /* Violet scrollbar thumb */
+    background-color: #212121;
     border-radius: 10px;
 }
 
 .skills-section::-webkit-scrollbar-track {
-    background: #ffffff; /* White background for scrollbar track */
+    background: #ffffff;
 }
 
+/* Skill Card Styling */
 .skill-card {
     width: 150px;
-    height: 150px;
-    background-color:white; /* White background for skill cards */
+    height: 170px;
+    background-color: white;
     border: 2px solid #ddd;
     border-radius: 8px;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Image Styling */
 .skill-card img {
-    width: 100%;
-    height: auto;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
 }
 
+/* Text Styling */
 .skill-card p {
-    margin-top: 10px;
+    margin-top: 8px;
     font-weight: bold;
     color: #212121;
+    font-size: 14px;
 }
 
-.skill-card:hover {
+/* Glow Effect for Currently Selected Card (Hovered or Focused) */
+.skill-card:hover, 
+.skill-card:focus {
     transform: scale(1.1);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(248, 81, 47, 0.8), 0 0 25px rgba(248, 81, 47, 0.6);
+    background-color: #fff3f0; /* Light orange background for hover */
+    border-color: #f8512f;
+}
+
+/* Optional: Glow for Active Card */
+.skill-card:active {
+    box-shadow: 0 0 20px rgba(248, 81, 47, 1), 0 0 30px rgba(248, 81, 47, 0.9);
 }
 
 /* Profile Links */
@@ -305,17 +334,11 @@ hr{
 }
 .profile-links {
     display: flex;
-    justify-content: center;
+    justify-content:center;
+    align-items:stretch;
     margin: auto;
     gap: 20px;
     margin-top: 30px;
-    background-color: #282c34;
-    width:fit-content;
-    border-radius: 50px;
-}
-.profile-links::after,.profile-links::before{
-    content: " ";
-    width:50px;
 }
 .profile-links a img {
     width: 50px;
@@ -338,35 +361,53 @@ hr{
 }
 /* Work Section */
 .pro{
-    color:#edfeeb;
+    color:#f0f0f0;
 }
-#work {
-    background-color: red;
+#work{
+    background-color:#212121 ;
     height: auto;
     justify-content: center;
     align-items: center;
 }
-sub{
-    font-size: 14px;
-}
+
 .current {
     text-align: center;
     padding: 20px;
+    background: color #212121;;
 }
 
-.current h2 {
+.current-content h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
+    color:white;
 }
-
+sub{
+    font-size: 14px;
+}
 .current-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px; /* Gap between video and description */
-    flex-wrap: wrap; /* Makes it responsive on smaller screens */
+    gap: 30px;
+    flex-wrap: wrap;
+    border:3px solid #f8512f;
 }
+#pro{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background-color:rgb(237, 59, 88);
+    gap:20px;
+    padding:5px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+#pro:hover{
+    border: 2px solid #f8512f;
+    box-shadow: 0 0 15px #f8512f;
+    transform: scale(1.05);
 
+}
 .current-video video {
     width: 500px;
     height: auto;
@@ -403,13 +444,15 @@ sub{
     gap: 30px;
 }
 .work__container{
-    background-color: #212121;
+    background-color: #f8512f;
+    
 }
 .work__container h2 {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 20px;
     color: #edfeeb;
+    text-decoration: #212121;
 }
 .work__item {
     background: #f4f4f4;
@@ -422,12 +465,13 @@ sub{
     justify-content: space-between;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     flex-grow: 1;
-}
+    border: 2px solid black;}
 
 .work__img video {
     width: 100%;
     height: 400px; /* Adjust the height of videos to fit better within the container */
     border-radius: 8px;
+    border:2px solid #212121;
 }
 
 .work__title {
@@ -521,21 +565,25 @@ sub{
     font-size: 1em;
     color: #bbb; /* Light grey color for the copyright text */
 }
-
+footer p{
+    text-shadow: 0 0 8px #f8512f88;
+}
 /* Responsive footer text alignment */
 @media screen and (max-width: 768px) {
     #nav-menu{
-        display: none;;
+        display: none;
     }
 
     .navy ul{
         display: flex;
         position: absolute;
         background-color: #282c34;
-        flex-direction: column;
-        right:45px;
+        left:0px;
         top:70px;
-        width:100px;
+        width: 100%;
+        height: 80px;
+        padding: 10px 60px;
+        background-color:#282c34;
     }
     .navy li{
         height:100%;
@@ -571,16 +619,27 @@ sub{
     .part1, .part2 {
         width: 100%; /* Full width for each part on smaller screens */
     }
+    .hero-text h2{
+        display:flex;
+        flex-direction: column;
+    }
 }
 
 /* Media Queries */
 @media (max-width: 768px) {
     /* Hero Section */
+    #pro{
+        flex-direction: column;
+        gap:10px;
+        width:90%;
+    }
     .hero_data {
         flex-direction: column; /* Stack content vertically */
         text-align: center;
     }
-
+    .current-video video{
+        width:95%;
+    }
     .hero-content {
         padding-left: 20px;
         padding-right: 20px;
