@@ -492,6 +492,8 @@ sub{
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
 }
 .fix{
     text-align: justify;
@@ -626,7 +628,7 @@ sub{
     }
 
     .flip-card {
-        height: 350px; /* Adjust for smaller screens */
+        height: 500px; /* Adjust for smaller screens */
     }
 
     .flip-card-front img,
@@ -671,6 +673,9 @@ footer p{
     #nav-menu{
         display: none;
     }
+  .flip-card:active .flip-card-inner {
+  transform: rotateY(180deg);
+}
 
     .navy ul{
         display: flex;
@@ -816,4 +821,18 @@ footer p{
     .project .project-img video {
         height: 200px;
     }
+    .flip-card-inner {
+    transition: transform 0.3s; /* Smoother flip for mobile */
+  }
+
+  /* Remove hover behavior on mobile */
+  .flip-card:hover .flip-card-inner {
+    transform: none;
+  }
+  .flip-card:hover{
+    transform:none;
+  }
+  .flip-card-inner.clicked {
+    transform: rotateY(180deg); /* Flip the card on touch/click */
+  }
 }
