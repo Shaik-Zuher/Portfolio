@@ -413,7 +413,11 @@ sub{
     height: auto;
     border-radius: 8px;
 }
-
+.current-video img {
+    width: 500px;
+    height: auto;
+    border-radius: 8px;
+}
 .current-description {
     max-width: 500px;
     text-align: left;
@@ -489,60 +493,154 @@ sub{
     margin-left: auto;
     margin-right: auto;
 }
-
+.fix{
+    text-align: justify;
+    margin:20px;
+    background:rgba(132, 131, 131, 0.659);
+    border-radius: 6px;
+    padding:20px;
+}
 /* Portfolio Grid */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 20px;
 }
 
 .project {
-    background: #f4f4f4;
-    padding: 10px;
+    background-color: white;
     border-radius: 8px;
+}
+
+/* Project title (fixed at the bottom) */
+.project-title {
     text-align: center;
+    font-size: 1.2em;
+    margin-top: 10px; /* Space between card and title */
+    border-top:2px solid black;
+    position: relative;
+    z-index: 1; /* Make sure title stays above the flip card */
+}
+
+/* Flip Card Container */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 300px; /* Adjust as needed */
+    perspective: 1500px; /* Creates the 3D effect */
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out; /* Smooth transition */
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front of the Card */
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+}
+
+.flip-card-front {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 0;
+}
+
+.flip-card-front a {
+    display: flex; /* Make the <a> tag behave like a flex container */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    width: 100%; /* Make the <a> tag fill the entire container */
+    height: 100%; /* Make the <a> tag fill the entire container */
+    overflow: hidden; /* Prevent video overflow */
+}
+
+.flip-card-front img,
+.flip-card-front video {
+    max-width: 100%; /* Prevent overflow of the video/image */
+    max-height: 100%; /* Prevent video overflow */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the video/image scales without distortion */
+    border-radius: 8px; /* Match the border radius of the card */
+}
+
+/* Back of the Card */
+.flip-card-back {
+    background-color: #fff;
+    color: black;
+    transform: rotateY(180deg);
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 85%;
-    margin: 0 auto;
+    text-align: center;
+    border-radius: 8px; /* Ensure back matches the front's border radius */
 }
 
-.project:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-.project-content {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 15px;
-}
-
-.project h3 {
-    font-size: 1.8em;
+.flip-card-back h3 {
+    font-size: 1.5em;
     margin-bottom: 10px;
 }
 
-.project .project-img img,
-.project .project-img video {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.project .description {
+.flip-card-back p {
     font-size: 1em;
     color: #666;
     line-height: 1.4;
-    max-width: 90%;
-    margin: 0 auto;
 }
+
+.flip-card-back .btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #f8512f;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.flip-card-back .btn:hover {
+    background-color: #333;
+}
+
+/* Responsive Styles for Flip Cards */
+@media screen and (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .flip-card {
+        height: 350px; /* Adjust for smaller screens */
+    }
+
+    .flip-card-front img,
+    .flip-card-front video { /* Make image/video fit on smaller screens */
+        width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .project-title {
+        font-size: 1.1em;
+    }
+}
+
 /* Footer Styles */
 .footer {
     background-color: #333; /* Dark background color */
@@ -638,6 +736,9 @@ footer p{
         text-align: center;
     }
     .current-video video{
+        width:95%;
+    }
+    .current-video img{
         width:95%;
     }
     .hero-content {
