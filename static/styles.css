@@ -339,6 +339,7 @@ hr{
     margin: auto;
     gap: 20px;
     margin-top: 30px;
+    overflow:auto;
 }
 .profile-links a img {
     width: 50px;
