@@ -1,83 +1,81 @@
 //Type function
-const auto_typed=document.getElementById("auto-type")
-var typed=new Typed(auto_typed,{ 
-    strings: ["Front End Developer","Software Developer"],
-    typeSpeed:100,
-    backSpeed:25,
-    loop:true
-})
+const auto_typed = document.getElementById("auto-type");
+var typed = new Typed(auto_typed, { 
+    strings: ["Front End Developer", "Software Developer"],
+    typeSpeed: 100,
+    backSpeed: 25,
+    loop: true
+});
+
 const navToggle = document.getElementById('nav-toggle');
 const navlist = document.getElementById('navy');
 
 navToggle.addEventListener('click', () => {
-    if(navlist.style.display=="flex"){
-        navlist.style.display="none"
-    }
-    else{
-    navlist.style.display="flex"
+    if (navlist.style.display === "flex") {
+        navlist.style.display = "none";
+    } else {
+        navlist.style.display = "flex";
     }
 });
-// Check the screen width and disable the link if on mobile
-// JavaScript to toggle flip effect on click and disable link on mobile
+
+// -------------------- Flip Card Behavior --------------------
+
+// Mobile: disable front-side links so that tapping flips the card only.
+if (window.innerWidth <= 768) {
+    document.querySelectorAll('.flip-card-front a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Prevent the link from activating on the front side.
+            e.preventDefault();
+        });
+    });
+}
+
+// Mobile: flip the card on click/touch (if not already flipped).
 document.querySelectorAll('.flip-card').forEach(card => {
     card.addEventListener('click', function(e) {
-        const innerCard = this.querySelector('.flip-card-inner');
-        const link = innerCard.querySelector('a');
-
-        // Only handle on mobile (width <= 768px)
         if (window.innerWidth <= 768) {
-            e.preventDefault(); // Prevent the link from being clicked
-
-            // Toggle the flip effect
-            innerCard.classList.toggle('clicked');
-
-            // Disable the link when the card is flipped
-            if (innerCard.classList.contains('clicked')) {
-                link.style.pointerEvents = 'none'; // Disable the link
-            } else {
-                link.style.pointerEvents = 'auto'; // Enable the link again when flipped back
+            const innerCard = this.querySelector('.flip-card-inner');
+            if (!innerCard.classList.contains('clicked')) {
+                innerCard.classList.add('clicked');
             }
+            // Stop propagation so that the document listener doesn't immediately flip it back.
+            e.stopPropagation();
         }
     });
-
-    // For touch devices, flip the card on touchstart
+    
     card.addEventListener('touchstart', function(e) {
-        const innerCard = this.querySelector('.flip-card-inner');
-        const link = innerCard.querySelector('a');
-
-        // Only handle on mobile (width <= 768px)
         if (window.innerWidth <= 768) {
-            e.preventDefault(); // Prevent the link from being clicked
-
-            // Toggle the flip effect
-            innerCard.classList.toggle('clicked');
-
-            // Disable the link when the card is flipped
-            if (innerCard.classList.contains('clicked')) {
-                link.style.pointerEvents = 'none'; // Disable the link
-            } else {
-                link.style.pointerEvents = 'auto'; // Enable the link again when flipped back
+            const innerCard = this.querySelector('.flip-card-inner');
+            if (!innerCard.classList.contains('clicked')) {
+                innerCard.classList.add('clicked');
             }
+            e.stopPropagation();
         }
     });
 });
 
-// For desktop, flip the card on hover
+// Mobile: clicking anywhere outside a flip-card flips all cards back.
+document.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+        if (!e.target.closest('.flip-card')) {
+            document.querySelectorAll('.flip-card .flip-card-inner.clicked')
+                .forEach(innerCard => {
+                    innerCard.classList.remove('clicked');
+                });
+        }
+    }
+});
+
+// Desktop: flip the card on hover.
 document.querySelectorAll('.flip-card').forEach(card => {
     const innerCard = card.querySelector('.flip-card-inner');
-    const link = innerCard.querySelector('a');
-
-    // Enable link on desktop and allow hover to work
     if (window.innerWidth > 768) {
         card.addEventListener('mouseenter', function() {
-            innerCard.classList.add('clicked'); // Add flip effect on hover
+            innerCard.classList.add('clicked');
         });
-
         card.addEventListener('mouseleave', function() {
-            innerCard.classList.remove('clicked'); // Remove flip effect on hover out
+            innerCard.classList.remove('clicked');
         });
-
-        link.style.pointerEvents = 'auto'; // Ensure link is clickable
     }
 });
 
