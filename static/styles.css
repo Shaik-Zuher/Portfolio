@@ -373,7 +373,7 @@ hr{
 .current {
     text-align: center;
     padding: 20px;
-    background: color #212121;;
+    background:#212121;;
 }
 
 .current-content h2 {
@@ -620,29 +620,6 @@ sub{
 .flip-card-back .btn:hover {
     background-color: #333;
 }
-
-/* Responsive Styles for Flip Cards */
-@media screen and (max-width: 768px) {
-    .portfolio-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .flip-card {
-        height: 500px; /* Adjust for smaller screens */
-    }
-
-    .flip-card-front img,
-    .flip-card-front video { /* Make image/video fit on smaller screens */
-        width: 100%;
-        max-height: 100%;
-        object-fit: contain;
-    }
-
-    .project-title {
-        font-size: 1.1em;
-    }
-}
-
 /* Footer Styles */
 .footer {
     background-color: #333; /* Dark background color */
@@ -673,9 +650,9 @@ footer p{
     #nav-menu{
         display: none;
     }
-  .flip-card:active .flip-card-inner {
-  transform: rotateY(180deg);
-}
+    .flip-card:active .flip-card-inner {
+        transform: rotateY(180deg);
+    }
 
     .navy ul{
         display: flex;
@@ -779,7 +756,7 @@ footer p{
         gap: 10px;
         padding:40px;
         height:200px;
-        border-radius:20px;
+        border-radius:2px;
     }
     .skill-card{
         display: flex;
@@ -822,17 +799,34 @@ footer p{
         height: 200px;
     }
     .flip-card-inner {
-    transition: transform 0.3s; /* Smoother flip for mobile */
-  }
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        /* Add additional styles for flip animation */
+    }
+    
+    .flip-card-inner.clicked {
+        transform: rotateY(180deg); /* Flips the card */
+    }
+    
+    .flip-card a {
+        pointer-events: auto; /* Ensure the link is clickable when the card is in its front position */
+    }
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
 
-  /* Remove hover behavior on mobile */
-  .flip-card:hover .flip-card-inner {
-    transform: none;
-  }
-  .flip-card:hover{
-    transform:none;
-  }
-  .flip-card-inner.clicked {
-    transform: rotateY(180deg); /* Flip the card on touch/click */
-  }
+    .flip-card {
+        height: 450px; /* Adjust for smaller screens */
+    }
+
+    .flip-card-front img,
+    .flip-card-front video { /* Make image/video fit on smaller screens */
+        width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .project-title {
+        font-size: 1.1em;
+    }
 }
